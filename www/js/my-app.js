@@ -514,7 +514,7 @@ function loadBaseDefault(step,step2){
 	}
 	
 	$$('#ldTimer').remove();
-	$$('.page-content').append('<div class="content-block" id="ldTimer" style="margin:5px;"><div class="content-block-inner"><div class="loadpersent" style="border-radius:3px;display:block;width:10%;background:green;height:20px;color:#ffffff;text-align:center;">0%</div></div></div></div>');
+	$$('.page-content').prepend('<div class="content-block" id="ldTimer" style="margin:5px;"><div class="content-block-inner"><div class="loadpersent" style="border-radius:3px;display:block;width:10%;background:green;height:20px;color:#ffffff;text-align:center;">0%</div></div></div></div>');
 	
 	//window.myApp.showPreloader('Идет загрузка данных...')
 	$$("#loadBase").hide();
