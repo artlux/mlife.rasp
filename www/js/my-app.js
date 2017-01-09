@@ -278,7 +278,7 @@ function getPage(page){
 		content = '' +                  
 		'<div class="content-block"> <div class="content-block inset"><div class="content-block-inner">'+
 		'<p>Это первый запуск приложения. Дождитесь загрузки данных.</p>'+
-		'<p><a href="#" id="loadBase" class="button active">Загрузить данные</a></p>'+
+		''+
 		''+
 		'</div>' +
 								'</div>'
@@ -500,6 +500,7 @@ var pages_arr = [];
 
 function loadBaseDefault(step,step2){
 	
+	setTimeout(function(){
 	if(!step){
 	checkConnection();
 	if(!window.connection) {
@@ -680,10 +681,12 @@ function loadBaseDefault(step,step2){
 		});
 		
 	}
+	},150);
 	
 }
 
 function loadPages(step,data){
+	setTimeout(function(){
 	if(step === false){
 		
 		var cnt = 0;
@@ -763,5 +766,6 @@ function loadPages(step,data){
 		}
 	
 	}
+	},150);
 	
 }
