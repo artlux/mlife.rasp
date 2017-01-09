@@ -19,14 +19,16 @@
     <!-- Panels overlay-->
     <div class="panel-overlay"></div>
     <!-- Left panel with reveal effect-->
-    <div class="panel panel-left panel-reveal" style="background:url('img/mlife_bg.png') 0 40px repeat;border-right:1px solid #000000;">
-<div class="center" style="text-align:center;border-bottom:1px solid #ffffff;"><img src="img/logo_rasp.png" style="height:39px;width:auto;"></div>
-<div id="menuBlock" class="content-block"><div class="center color-white" style="text-align:center;font-weight:bold;">Нет данных по расписаниям.</br></br>Вы должны загрузить расписания.</div></div>
+    <div class="panel panel-left panel-reveal" style="background:rgb(142, 142, 147);border-right:1px solid rgb(200, 199, 204);">
+<div class="center" style="text-align:center;border-bottom:1px solid #ffffff;background:#1d1d1d;"><img src="img/logo_rasp.png" style="height:39px;width:auto;"></div>
+<div class="list-block color-black" id="menuBlock" style="margin-top:0;"><div class="center color-white" style="text-align:center;font-weight:bold;">Нет данных по расписаниям.</br></br>Вы должны загрузить расписания.</div></div>
     </div>
     <!-- Right panel with cover effect-->
     <div class="panel panel-right panel-cover" style="background:url('img/mlife_bg.png') 0 40px repeat;border-left:1px solid #000000;">
-      <div class="center" style="text-align:center;border-bottom:1px solid #ffffff;"><img src="img/logo_rasp.png" style="height:39px;width:auto;"></div>
-	<div id="defBook" class="content-block"><div class="center color-white" style="text-align:center;font-weight:bold;">Список избранного пуст.</br></br>Вы можете добавить сюда страницы для быстрого доступа.</div></div>
+      <div class="center" style="text-align:center;border-bottom:1px solid #ffffff;background:#1d1d1d;"><img src="img/logo_rasp.png" style="height:39px;width:auto;"></div>
+	<div id="defBook" class="content-block">
+	<div class="center color-white" style="text-align:center;font-weight:bold;">Список избранного пуст.</br></br>Вы можете добавить сюда страницы для быстрого доступа.</div>
+	</div>
     </div>
     <!-- Views-->
     <div class="views">
@@ -36,19 +38,14 @@
         <div class="navbar layout-dark">
 	    <div class="navbar-inner">
 		<div class="left">
+			<a href="#" class="link icon-only color-white" onclick="mainView.router.back();return;">< Назад</a>
 		</div>
 		<div class="center"><span>MLife.BY</span></div>
 		<div class="right">
 		    <a href="#" class="link icon-only open-panel" data-panel="left"> <i class="icon icon-bars color-pink"></i></a>
 		</div>
-		<div class="subnavbar layout-white">
-			<div class="wrapTimeRasp">
-			<span id="doc_time"></span>
-			<span class="minus">-</span><span id="doc_timepodbor"><b>Отп.: </b><i data-time=""></i></span><span class="plus">+</span><span class="refr">сброс</span>
-			</div>
-        </div>
 	    </div>
-		</div>
+	</div>
         <!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
         <div class="pages navbar-through toolbar-through theme-pink">
           <!-- Page, data-page contains page name-->
@@ -60,11 +57,53 @@
           </div>
         </div>
         <!-- Bottom Toolbar-->
-        <div class="toolbar bg-pink">
-          <div class="toolbar-inner"><a href="#" class="link color-white"></a><a href="#" data-panel="right" class="link open-panel color-white">Избранное</a></div>
+        <div class="toolbar bg-black">
+          <div class="toolbar-inner"><div id="bottomMenu"></div><a href="#" data-panel="right" class="link open-panel color-white">Избранное</a></div>
         </div>   
       </div>
     </div>
+    
+    <!-- Services Popup -->
+<div class="popup popup-bokkmark">
+<div class="content-block">
+<p><a href="#" class="button color-pink close-popup">Закрыть окно</a></p>
+<div class="content-block-title spaceNormal">Избранное</div>
+  
+<form id="my-popup-bokkmark" class="list-block">
+	<ul>
+	<li>
+	<div class="item-content">
+	<div class="item-inner">
+	введите название вкладки
+	</div>
+	</div>
+	</li>
+	<li>
+	<div class="item-content">
+	<div class="item-media"><i class="icon icon-form-comment"></i></div>
+	<div class="item-inner">
+	<div class="item-input">
+		<input type="text" name="name" id="my-popup-bokkmark-name" placeholder="" autocomplete="none">
+		<input type="hidden" name="page" id="my-popup-bokkmark-page">
+	</div>
+	</div>
+	</div>
+	</li>
+	</ul>
+	<div class="content-block">
+	<div class="row">
+	  <div class="col-50">
+		<a href="#" class="button button-big button-fill color-green button-save">сохранить</a>
+	  </div>
+	  <div class="col-50">
+		<a href="#" class="button button-big button-fill color-red button-del">удалить</a>
+	  </div>
+	</div>
+	</div>
+</form>
+</div>
+</div>
+    
     <!-- Path to Framework7 Library JS-->
 <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/framework7.min.js"></script>
