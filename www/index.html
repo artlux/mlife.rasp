@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>MLife.Расписание.</title>
+    <!-- Path to Framework7 Library CSS-->
+    <link rel="stylesheet" href="css/framework7.ios.min.css">
+    <link rel="stylesheet" href="css/framework7.ios.colors.min.css">
+	<script id="jsBlock"></script>
+	<style id="stylesBlock">.wrapTimeRasp{display:none;}</style>
+  </head>
+  <body>
+ 
+    <!-- Status bar overlay for fullscreen mode-->
+    <div class="statusbar-overlay"></div>
+    <!-- Panels overlay-->
+    <div class="panel-overlay"></div>
+    <!-- Left panel with reveal effect-->
+    <div class="panel panel-left panel-reveal" style="background:url('img/mlife_bg.png') 0 40px repeat;border-right:1px solid #000000;">
+<div class="center" style="text-align:center;border-bottom:1px solid #ffffff;"><img src="img/logo_rasp.png" style="height:39px;width:auto;"></div>
+<div id="menuBlock" class="content-block"><div class="center color-white" style="text-align:center;font-weight:bold;">Нет данных по расписаниям.</br></br>Вы должны загрузить расписания.</div></div>
+    </div>
+    <!-- Right panel with cover effect-->
+    <div class="panel panel-right panel-cover" style="background:url('img/mlife_bg.png') 0 40px repeat;border-left:1px solid #000000;">
+      <div class="center" style="text-align:center;border-bottom:1px solid #ffffff;"><img src="img/logo_rasp.png" style="height:39px;width:auto;"></div>
+	<div id="defBook" class="content-block"><div class="center color-white" style="text-align:center;font-weight:bold;">Список избранного пуст.</br></br>Вы можете добавить сюда страницы для быстрого доступа.</div></div>
+    </div>
+    <!-- Views-->
+    <div class="views">
+      <!-- Your main view, should have "view-main" class-->
+      <div class="view view-main">
+        <!-- Top Navbar-->
+        <div class="navbar layout-dark">
+	    <div class="navbar-inner">
+		<div class="left">
+		</div>
+		<div class="center"><span>MLife.BY</span></div>
+		<div class="right">
+		    <a href="#" class="link icon-only open-panel" data-panel="left"> <i class="icon icon-bars color-pink"></i></a>
+		</div>
+		<div class="subnavbar layout-white">
+			<div class="wrapTimeRasp">
+			<span id="doc_time"></span>
+			<span class="minus">-</span><span id="doc_timepodbor"><b>Отп.: </b><i data-time=""></i></span><span class="plus">+</span><span class="refr">сброс</span>
+			</div>
+        </div>
+	    </div>
+		</div>
+        <!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
+        <div class="pages navbar-through toolbar-through theme-pink">
+          <!-- Page, data-page contains page name-->
+          <div data-page="index" class="page with-subnavbar">
+            <!-- Scrollable page content-->
+            <div class="page-content">
+<p style="text-align:center;">Идет загрузка страницы...<br><span class="preloader"></span></p>
+            </div>
+          </div>
+        </div>
+        <!-- Bottom Toolbar-->
+        <div class="toolbar bg-pink">
+          <div class="toolbar-inner"><a href="#" class="link color-white"></a><a href="#" data-panel="right" class="link open-panel color-white">Избранное</a></div>
+        </div>   
+      </div>
+    </div>
+    <!-- Path to Framework7 Library JS-->
+<script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/framework7.min.js"></script>
+    <!-- Path to your app js-->
+	<script type="text/javascript" src="js/my-app.js"></script>
+  </body>
+</html>
