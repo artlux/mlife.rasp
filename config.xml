@@ -21,7 +21,7 @@
     <preference name="SplashScreenDelay" value="2000" />
     <platform name="android">
         <allow-intent href="market:*" />
-	<preference name="android-minSdkVersion" value="14" />
+	<preference name="android-minSdkVersion" value="15" />
 	<icon src="res/android/ldpi.png" density="ldpi" />
         <icon src="res/android/mdpi.png" density="mdpi" />
         <icon src="res/android/hdpi.png" density="hdpi" />
