@@ -366,13 +366,18 @@ function loadPageForUrl(href){
 		pullToRefresh = false;
 		content = '<div class="page" data-page="'+curentPage+'"><div class="page-content pull-to-refresh-content"><div class="pull-to-refresh-layer"><div class="preloader"></div><div class="pull-to-refresh-arrow"></div></div>'+content+'</div></div>';
 		}
-		
+		if(curentPage == 'main' || curentPage == 'main_old') {
+			window.reload = true;
+		}
 		window.mainView.router.load({
 		  content: content,
 		  animatePages: false,
 		  reload: window.reload,
 		  ignoreCache: true
 		});
+		if(curentPage == 'main' || curentPage == 'main_old') {
+			window.reload = false;
+		}
 		window.myApp.hidePreloader();
 			
 		}
