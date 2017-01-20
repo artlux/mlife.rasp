@@ -445,13 +445,18 @@ if(last == version){
 			},
 			error: function(){
 				window.connection = false;
+				loadVersion = true;
 			}
 		});
 		},150);
 		
+	}else{
+		loadVersion = true;
 	}
+}else{
+	loadVersion = true;
 }
-loadVersion = true;
+
 
 return last;
 }
