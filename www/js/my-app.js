@@ -534,6 +534,7 @@ function loadBaseDefault(step,step2){
 	checkConnection();
 	if(!window.connection) {
 		window.myApp.alert('Нет соединения, загрузка невозможна.','Уведомление');
+		window.curentLoadBase = false;
 		return;
 	}
 	
