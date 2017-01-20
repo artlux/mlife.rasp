@@ -438,6 +438,7 @@ if(last == version){
 			success : function(data){
 				if(data != version) {
 					localStorage.setItem('last_version',data);
+					version = data;
 					loadVersion = true;
 				}else{
 					loadVersion = true;
@@ -839,6 +840,7 @@ function loadPages(step,data){
 										timeout: 5000,
 										success : function(data){
 											localStorage.setItem('last_version',data);
+											version = data;
 											loadVersion = true;
 											window.curentLoadBase = false;
 											loader = true;
