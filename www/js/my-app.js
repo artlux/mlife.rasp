@@ -538,8 +538,12 @@ function loadBaseDefault(step,step2){
 		return;
 	}
 	
-	$$('#ldTimer').remove();
-	$$('.page-content').prepend('<div class="content-block" id="ldTimer" style="margin:5px;"><div class="content-block-inner"><div class="loadpersent" style="border-radius:3px;display:block;width:10%;background:green;height:20px;color:#ffffff;text-align:center;">0%</div></div></div></div>');
+	$$('body .ldTimer').remove();
+	var eq = -1;
+	$$('body .page-content').each(function(){
+		eq = eq + 1;
+	});
+	$$('body .page-content').eq(eq).prepend('<div class="content-block ldTimer" id="ldTimer" style="margin:5px;"><div class="content-block-inner"><div class="loadpersent" style="border-radius:3px;display:block;width:10%;background:green;height:20px;color:#ffffff;text-align:center;">0%</div></div></div></div>');
 	
 	//window.myApp.showPreloader('Идет загрузка данных...')
 	$$("#loadBase").hide();
@@ -566,7 +570,7 @@ function loadBaseDefault(step,step2){
 		tx.executeSql("DELETE FROM pages WHERE ID>0",[]);
 		tx.executeSql("DELETE FROM tmpl WHERE ID>0",[]);
 	},function(){},function(){
-		
+		tmpl = {};
 		loadBaseDefault(2);
 
 	});
@@ -602,6 +606,7 @@ function loadBaseDefault(step,step2){
 					$$('#ldTimer .loadpersent').css({'width': '100%', 'background':'red'});
 					$$("#loadBase").show();
 					window.curentLoadBase = false;
+					tmpl = {};
 
 				});
 				
@@ -641,6 +646,7 @@ function loadBaseDefault(step,step2){
 					$$('#ldTimer .loadpersent').css({'width': '100%', 'background':'red'});
 					$$("#loadBase").show();
 					window.curentLoadBase = false;
+					tmpl = {};
 
 				});
 			}
@@ -675,6 +681,7 @@ function loadBaseDefault(step,step2){
 					$$('#ldTimer .loadpersent').css({'width': '100%', 'background':'red'});
 					$$("#loadBase").show();
 					window.curentLoadBase = false;
+					tmpl = {};
 
 				});
 			}
@@ -709,6 +716,7 @@ function loadBaseDefault(step,step2){
 					$$('#ldTimer .loadpersent').css({'width': '100%', 'background':'red'});
 					$$("#loadBase").show();
 					window.curentLoadBase = false;
+					tmpl = {};
 
 				});
 			}
@@ -737,6 +745,7 @@ function loadBaseDefault(step,step2){
 					$$('#ldTimer .loadpersent').css({'width': '100%', 'background':'red'});
 					$$("#loadBase").show();
 					window.curentLoadBase = false;
+					tmpl = {};
 
 				});
 			}
@@ -812,8 +821,9 @@ function loadPages(step,data){
 								$$('#ldTimer .loadpersent').html('Загрузка данных завершена');
 								$$('#ldTimer .loadpersent').css({'width': '100%'});
 								
-								location.href = 'index.html';
 								window.curentLoadBase = false;
+								location.href = 'index.html';
+								
 							});
 							
 						}
@@ -828,6 +838,7 @@ function loadPages(step,data){
 							$$('#ldTimer .loadpersent').css({'width': '100%', 'background':'red'});
 							$$("#loadBase").show();
 							window.curentLoadBase = false;
+							tmpl = {};
 
 						});
 						
