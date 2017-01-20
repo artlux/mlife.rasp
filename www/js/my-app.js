@@ -261,7 +261,7 @@ function getPage(page){
 	if(res.rows.length > 0){
 		var tmp = getTmpl(res.rows.item(0)['type']);
 		if(!tmp){
-			loadCnt = '<p class="errorPage">ERROR load page '+page+'</p><p>Шаблон не найден, возможно произошла ошибка при загрузке данных. Проверьте соединение с интернетом и повторите загрузку.</p><p><a href="#" id="loadBase" class="button active">Загрузить данные</a></p>';
+			loadCnt = '<p class="errorPage">ERROR load page '+page+'</p><p>Шаблон не найден, возможно произошла ошибка при загрузке данных. Проверьте соединение с Internet и повторите загрузку.</p><p><a href="#" id="loadBase" class="button active">Загрузить данные</a></p>';
 		}else{
 			if (window.debug) console.log('startpage - '+page);
 			if(window.onPageGenerate !== false) {
@@ -279,7 +279,7 @@ function getPage(page){
 		content = '' +                  
 		'<div class="content-block"> <div class="content-block inset"><div class="content-block-inner">'+
 		'<p>Это первый запуск приложения. Дождитесь загрузки данных.</p>'+
-		''+
+		'<p><a href="#" id="loadBase" class="button active" style="display:none;">Загрузить данные</a></p>'+
 		''+
 		'</div>' +
 								'</div>'
@@ -428,6 +428,7 @@ if(last == version){
 		
 		loadVersion = false;
 		
+		setTimeout(function(){
 		$$.ajax({
 			url : window.startUrl+'version/',
 			async : false,
@@ -446,6 +447,7 @@ if(last == version){
 				window.connection = false;
 			}
 		});
+		},150);
 		
 	}
 }
@@ -591,10 +593,18 @@ function loadBaseDefault(step,step2){
 			},
 			error : function(){
 				
-				$$('#ldTimer .loadpersent').html('Ошибка связи');
-				$$('#ldTimer .loadpersent').css({'width': '100%', 'background':'red'});
-				$$("#loadBase").show();
-				window.curentLoadBase = false;
+				db.transaction(function(tx){
+					tx.executeSql("DELETE FROM tmpl WHERE ID>0",[]);
+				},function(){},function(){
+					
+					$$('#ldTimer .loadpersent').html('Ошибка связи');
+					$$('#ldTimer .loadpersent').css({'width': '100%', 'background':'red'});
+					$$("#loadBase").show();
+					window.curentLoadBase = false;
+
+				});
+				
+				
 			}
 		});
 		
@@ -622,10 +632,16 @@ function loadBaseDefault(step,step2){
 			},
 			error : function(){
 				
-				$$('#ldTimer .loadpersent').html('Ошибка связи');
-				$$('#ldTimer .loadpersent').css({'width': '100%', 'background':'red'});
-				$$("#loadBase").show();
-				window.curentLoadBase = false;
+				db.transaction(function(tx){
+					tx.executeSql("DELETE FROM tmpl WHERE ID>0",[]);
+				},function(){},function(){
+					
+					$$('#ldTimer .loadpersent').html('Ошибка связи');
+					$$('#ldTimer .loadpersent').css({'width': '100%', 'background':'red'});
+					$$("#loadBase").show();
+					window.curentLoadBase = false;
+
+				});
 			}
 		});
 		
@@ -650,10 +666,16 @@ function loadBaseDefault(step,step2){
 			},
 			error : function(){
 				
-				$$('#ldTimer .loadpersent').html('Ошибка связи');
-				$$('#ldTimer .loadpersent').css({'width': '100%', 'background':'red'});
-				$$("#loadBase").show();
-				window.curentLoadBase = false;
+				db.transaction(function(tx){
+					tx.executeSql("DELETE FROM tmpl WHERE ID>0",[]);
+				},function(){},function(){
+					
+					$$('#ldTimer .loadpersent').html('Ошибка связи');
+					$$('#ldTimer .loadpersent').css({'width': '100%', 'background':'red'});
+					$$("#loadBase").show();
+					window.curentLoadBase = false;
+
+				});
 			}
 		});
 		
@@ -678,10 +700,16 @@ function loadBaseDefault(step,step2){
 			},
 			error : function(){
 				
-				$$('#ldTimer .loadpersent').html('Ошибка связи');
-				$$('#ldTimer .loadpersent').css({'width': '100%', 'background':'red'});
-				$$("#loadBase").show();
-				window.curentLoadBase = false;
+				db.transaction(function(tx){
+					tx.executeSql("DELETE FROM tmpl WHERE ID>0",[]);
+				},function(){},function(){
+					
+					$$('#ldTimer .loadpersent').html('Ошибка связи');
+					$$('#ldTimer .loadpersent').css({'width': '100%', 'background':'red'});
+					$$("#loadBase").show();
+					window.curentLoadBase = false;
+
+				});
 			}
 		});
 		
@@ -700,10 +728,16 @@ function loadBaseDefault(step,step2){
 			},
 			error : function(){
 				
-				$$('#ldTimer .loadpersent').html('Ошибка связи');
-				$$('#ldTimer .loadpersent').css({'width': '100%', 'background':'red'});
-				$$("#loadBase").show();
-				window.curentLoadBase = false;
+				db.transaction(function(tx){
+					tx.executeSql("DELETE FROM tmpl WHERE ID>0",[]);
+				},function(){},function(){
+					
+					$$('#ldTimer .loadpersent').html('Ошибка связи');
+					$$('#ldTimer .loadpersent').css({'width': '100%', 'background':'red'});
+					$$("#loadBase").show();
+					window.curentLoadBase = false;
+
+				});
 			}
 		});
 		
@@ -785,10 +819,16 @@ function loadPages(step,data){
 					},
 					error : function(){
 						
-						$$('#ldTimer .loadpersent').html('Ошибка связи.');
-						$$('#ldTimer .loadpersent').css({'width': '100%', 'background':'red'});
-						$$("#loadBase").show();
-						window.curentLoadBase = false;
+						db.transaction(function(tx){
+							tx.executeSql("DELETE FROM tmpl WHERE ID>0",[]);
+						},function(){},function(){
+							
+							$$('#ldTimer .loadpersent').html('Ошибка связи');
+							$$('#ldTimer .loadpersent').css({'width': '100%', 'background':'red'});
+							$$("#loadBase").show();
+							window.curentLoadBase = false;
+
+						});
 						
 					}
 				});
