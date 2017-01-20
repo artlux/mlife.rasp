@@ -815,14 +815,39 @@ function loadPages(step,data){
 									tx.executeSql("INSERT INTO pages (ID, type, text) VALUES (?,?,?)",[val['page'],val['type'],JSON.stringify(val['text'])],function(){});
 								});
 							},function(){},function(){
+								window.curentLoadBase = false;
 								loader = true;
-								setLastVersion(true);
+								//setLastVersion(true);
 								
 								$$('#ldTimer .loadpersent').html('Загрузка данных завершена');
 								$$('#ldTimer .loadpersent').css({'width': '100%'});
 								
-								window.curentLoadBase = false;
-								location.href = 'index.html';
+								//tmpl = {};
+								
+								setTimeout(function(){
+									$$.ajax({
+										url : window.startUrl+'version/',
+										async : false,
+										data : {device:window.deviceId, key: localStorage.getItem('authorize_key')},
+										dataType: 'html',
+										timeout: 5000,
+										success : function(data){
+											if(data != version) {
+												localStorage.setItem('last_version',data);
+												loadVersion = true;
+											}else{
+												loadVersion = true;
+											}
+											location.href = 'index.html';
+										},
+										error: function(){
+											//window.connection = false;
+											location.href = 'index.html';
+										}
+									});
+								},150);
+								
+								
 								
 							});
 							
