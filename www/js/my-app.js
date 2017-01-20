@@ -507,6 +507,7 @@ db.transaction(function(tx){
 }
 
 $$(document).on('click', '#exit', function () {
+if(window.curentLoadBase) return false;
 	if (navigator && navigator.app) {
          navigator.app.exitApp();
     }else{
@@ -517,6 +518,7 @@ $$(document).on('click', '#exit', function () {
 });
 
 $$(document).on('click', '#loadBase',function (e) {
+if(window.curentLoadBase) return false;
 	loadBaseDefault();
 });
 
