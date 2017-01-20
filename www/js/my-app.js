@@ -261,7 +261,7 @@ function getPage(page){
 	if(res.rows.length > 0){
 		var tmp = getTmpl(res.rows.item(0)['type']);
 		if(!tmp){
-			loadCnt = '<p class="errorPage">ERROR load page '+page+'</p><p>Шаблон не найден, возможно произошла ошибка при загрузке данных. Проверьте соединение с Internet и повторите загрузку.</p><p><a href="#" id="loadBase" class="button active">Загрузить данные</a></p>';
+			loadCnt = '<div class="content-block-inner"><p class="errorPage">ERROR load page '+page+'</p><p>Шаблон не найден, возможно произошла ошибка при загрузке данных. Проверьте соединение с Internet и повторите загрузку.</p><p><a href="#" id="loadBase" class="button active">Загрузить данные</a></p></div>';
 		}else{
 			if (window.debug) console.log('startpage - '+page);
 			if(window.onPageGenerate !== false) {
@@ -301,12 +301,12 @@ function getPage(page){
 		loadCnt = content;
 		//loadBaseDefault();
 	}else if(!loadCnt) {
-		loadCnt = '<p class="errorPage">ERROR load page '+page+'</p>';
+		loadCnt = '<div class="content-block-inner"><p class="errorPage">ERROR load page '+page+'</p></div>';
 		
 	}
 	},
 	function(tx,err){
-	loadCnt = '<p class="errorPage">ERROR sql load page '+page+'</p>';
+	loadCnt = '<div class="content-block-inner"><p class="errorPage">ERROR sql load page '+page+'</p></div>';
 	}
 	);
 	});
@@ -592,7 +592,7 @@ function loadBaseDefault(step,step2){
 					});
 				},function(r){
 				},function(){
-					setTmpl();
+					
 					loadBaseDefault(3);
 				});
 			},
@@ -630,7 +630,7 @@ function loadBaseDefault(step,step2){
 					
 					db.transaction(function(tx){
 					tx.executeSql("INSERT INTO block (ID, text) VALUES (?,?)",['menu',data],function(){
-					loadMenu();
+					//loadMenu();
 					loadBaseDefault(4);
 					});
 					});
@@ -815,8 +815,8 @@ function loadPages(step,data){
 									tx.executeSql("INSERT INTO pages (ID, type, text) VALUES (?,?,?)",[val['page'],val['type'],JSON.stringify(val['text'])],function(){});
 								});
 							},function(){},function(){
-								window.curentLoadBase = false;
-								loader = true;
+								
+								
 								//setLastVersion(true);
 								
 								$$('#ldTimer .loadpersent').html('Загрузка данных завершена');
@@ -824,7 +824,8 @@ function loadPages(step,data){
 								
 								//tmpl = {};
 								
-								setTimeout(function(){
+								//setTimeout(function(){
+									loadVersion = false;
 									$$.ajax({
 										url : window.startUrl+'version/',
 										async : false,
@@ -834,14 +835,21 @@ function loadPages(step,data){
 										success : function(data){
 											localStorage.setItem('last_version',data);
 											loadVersion = true;
+											window.curentLoadBase = false;
+											loader = true;
+											//setTmpl();
 											location.href = 'index.html';
+											
 										},
 										error: function(){
 											//window.connection = false;
+											window.curentLoadBase = false;
+											loader = true;
+											//setTmpl();
 											location.href = 'index.html';
 										}
 									});
-								},150);
+								//},150);
 								
 								
 								
