@@ -275,7 +275,7 @@ function getPage(page){
 		}
 	}
 	
-	if((page == 'main' || page == 'main_old') && !loadCnt){
+	if((page == 'main' || page == 'main_old' || page == 'main_offline') && !loadCnt){
 		content = '' +                  
 		'<div class="content-block"> <div class="content-block inset"><div class="content-block-inner">'+
 		'<p>Это первый запуск приложения. Дождитесь загрузки данных.</p>'+
