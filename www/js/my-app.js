@@ -275,7 +275,7 @@ function getPage(page){
 		}
 	}
 	
-	if((page == 'main' || page == 'main_old' || page == 'main_offline') && !loadCnt){
+	if((page == 'main' || page == 'main_old') && !loadCnt){
 		content = '' +                  
 		'<div class="content-block"> <div class="content-block inset"><div class="content-block-inner">'+
 		'<p>Это первый запуск приложения. Дождитесь загрузки данных.</p>'+
@@ -288,6 +288,18 @@ function getPage(page){
 		loadCnt = content;
 		loadBaseDefault();
 		
+	}else if(page == 'main_offline' && !loadCnt){
+		content = '' +                  
+		'<div class="content-block"> <div class="content-block inset"><div class="content-block-inner">'+
+		'<p>Это первый запуск приложения. подключитесь к сети Internet и загрузите данные.</p>'+
+		'<p><a href="#" id="loadBase" class="button active">Загрузить данные</a></p>'+
+		''+
+		'</div>' +
+								'</div>'
+		'</div>' +
+		'';
+		loadCnt = content;
+		//loadBaseDefault();
 	}else if(!loadCnt) {
 		loadCnt = '<p class="errorPage">ERROR load page '+page+'</p>';
 		
