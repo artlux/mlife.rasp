@@ -594,7 +594,7 @@ function loadBaseDefault(step,step2){
 				$$('#ldTimer .loadpersent').html('Ошибка связи');
 				$$('#ldTimer .loadpersent').css({'width': '100%', 'background':'red'});
 				$$("#loadBase").show();
-				
+				window.curentLoadBase = false;
 			}
 		});
 		
@@ -625,7 +625,7 @@ function loadBaseDefault(step,step2){
 				$$('#ldTimer .loadpersent').html('Ошибка связи');
 				$$('#ldTimer .loadpersent').css({'width': '100%', 'background':'red'});
 				$$("#loadBase").show();
-				
+				window.curentLoadBase = false;
 			}
 		});
 		
@@ -653,7 +653,7 @@ function loadBaseDefault(step,step2){
 				$$('#ldTimer .loadpersent').html('Ошибка связи');
 				$$('#ldTimer .loadpersent').css({'width': '100%', 'background':'red'});
 				$$("#loadBase").show();
-				
+				window.curentLoadBase = false;
 			}
 		});
 		
@@ -681,7 +681,7 @@ function loadBaseDefault(step,step2){
 				$$('#ldTimer .loadpersent').html('Ошибка связи');
 				$$('#ldTimer .loadpersent').css({'width': '100%', 'background':'red'});
 				$$("#loadBase").show();
-				
+				window.curentLoadBase = false;
 			}
 		});
 		
@@ -703,7 +703,7 @@ function loadBaseDefault(step,step2){
 				$$('#ldTimer .loadpersent').html('Ошибка связи');
 				$$('#ldTimer .loadpersent').css({'width': '100%', 'background':'red'});
 				$$("#loadBase").show();
-				
+				window.curentLoadBase = false;
 			}
 		});
 		
