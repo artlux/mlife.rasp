@@ -852,6 +852,7 @@ function loadPages(step,data){
 											//window.connection = false;
 											window.curentLoadBase = false;
 											loader = true;
+											loadVersion = true;
 											//setTmpl();
 											location.href = 'index.html';
 										}
