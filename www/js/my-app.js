@@ -832,12 +832,8 @@ function loadPages(step,data){
 										dataType: 'html',
 										timeout: 5000,
 										success : function(data){
-											if(data != version) {
-												localStorage.setItem('last_version',data);
-												loadVersion = true;
-											}else{
-												loadVersion = true;
-											}
+											localStorage.setItem('last_version',data);
+											loadVersion = true;
 											location.href = 'index.html';
 										},
 										error: function(){
