@@ -13,6 +13,7 @@ window.onPageGenerate = false;
 window.connection = false;
 
 window.reload = false;
+window.curentLoadBase = false;
 
 //version
 var version = localStorage.getItem('version');
@@ -308,6 +309,7 @@ function getPage(page){
 
 $$(document).on('click','a.backlink',function(e){
 	e.preventDefault();
+	if(window.curentLoadBase) return false;
 	var count = 0;
 	var lastHistory = '';
 	var prevHistory = '';
@@ -339,9 +341,13 @@ $$(document).on('click','a',function(e){
 	if($$(this).attr('href').indexOf('#') === 0){
 		e.preventDefault();
 	}
+	
 	if($$(this).attr('href').indexOf('link.html') === 0){
 	e.preventDefault();
 	}
+	
+	if(window.curentLoadBase) return false;
+	
 	loadPageForUrl($$(this).attr('href'));
 	
 	
@@ -415,6 +421,7 @@ if(last == version){
 			async : false,
 			data : {device:window.deviceId, key: localStorage.getItem('authorize_key')},
 			dataType: 'html',
+			timeout: 5000,
 			success : function(data){
 				if(data != version) {
 					localStorage.setItem('last_version',data);
@@ -424,7 +431,7 @@ if(last == version){
 				}
 			},
 			error: function(){
-				
+				window.connection = false;
 			}
 		});
 		
@@ -507,6 +514,7 @@ function loadBaseDefault(step,step2){
 	
 	setTimeout(function(){
 	if(!step){
+	window.curentLoadBase = true;
 	checkConnection();
 	if(!window.connection) {
 		window.myApp.alert('Нет соединения, загрузка невозможна.','Уведомление');
@@ -751,9 +759,12 @@ function loadPages(step,data){
 							},function(){},function(){
 								loader = true;
 								setLastVersion(true);
-								location.href = 'index.html';
+								
 								$$('#ldTimer .loadpersent').html('Загрузка данных завершена');
 								$$('#ldTimer .loadpersent').css({'width': '100%'});
+								
+								location.href = 'index.html';
+								window.curentLoadBase = false;
 							});
 							
 						}
@@ -763,6 +774,7 @@ function loadPages(step,data){
 						$$('#ldTimer .loadpersent').html('Ошибка связи.');
 						$$('#ldTimer .loadpersent').css({'width': '100%', 'background':'red'});
 						$$("#loadBase").show();
+						window.curentLoadBase = false;
 						
 					}
 				});
