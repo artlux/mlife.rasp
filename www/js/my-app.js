@@ -545,11 +545,7 @@ function loadBaseDefault(step,step2){
 	}
 	
 	$$('body .ldTimer').remove();
-	var eq = -1;
-	$$('body .page-content').each(function(){
-		eq = eq + 1;
-	});
-	$$('body .page-content').eq(eq).prepend('<div class="content-block ldTimer" id="ldTimer" style="margin:5px;"><div class="content-block-inner"><div class="loadpersent" style="border-radius:3px;display:block;width:10%;background:green;height:20px;color:#ffffff;text-align:center;">0%</div></div></div></div>');
+	$$('body .page-on-center .page-content').prepend('<div class="content-block ldTimer" id="ldTimer" style="margin:5px;"><div class="content-block-inner"><div class="loadpersent" style="border-radius:3px;display:block;width:10%;background:green;height:20px;color:#ffffff;text-align:center;">0%</div></div></div></div>');
 	
 	//window.myApp.showPreloader('Идет загрузка данных...')
 	$$("#loadBase").hide();
@@ -839,7 +835,7 @@ function loadPages(step,data){
 										dataType: 'html',
 										timeout: 5000,
 										success : function(data){
-											localStorage.setItem('last_version',data);
+											localStorage.setItem('version',data);
 											version = data;
 											loadVersion = true;
 											window.curentLoadBase = false;
