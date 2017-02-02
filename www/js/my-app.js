@@ -212,7 +212,7 @@ function getTmpl(id){
 var loader = false;
 
 function getPage(page){
-	window.myApp.showPreloader("Загрузка страницы");
+	
 	checkConnection();
 	
 	if(typeof window.getPageHandler == 'function'){
@@ -313,10 +313,8 @@ function getPage(page){
 
 function loadPageForUrl(href){
 	if(href.indexOf('link.html') === 0){
-		
-		
+		window.myApp.showPreloader("Загрузка страницы");
 		startPageContent(href);
-		
 		setTimeout(function t(){
 			if(!loadCnt) {
 				setTimeout(t,100);
@@ -345,7 +343,7 @@ function loadPageForUrl(href){
 			window.myApp.hidePreloader();
 				
 			}
-		},100);
+		},150);
 	
 	}else{
 		return;
@@ -461,22 +459,7 @@ db.transaction(function(tx){
 });
 }
 
-var touchmove = false;
 $$(document).on('click','a',function(e){
-	e.preventDefault();
-});
-$$(document).on('click','a',function(e){
-	touchmode = true;
-});
-$$(document).on('touchmove','a',function(e){
-	touchmove = true;
-});
-$$(document).on('touchend','a',function(e){
-	
-	if(touchmove) {
-		touchmove = false;
-		return;
-	}
 	
 	if($$(this).hasClass('closep')) {
 		window.myApp.closePanel();
