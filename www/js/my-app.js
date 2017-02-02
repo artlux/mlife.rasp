@@ -460,7 +460,14 @@ db.transaction(function(tx){
 	});
 });
 }
+
 var touchmove = false;
+$$(document).on('click','a',function(e){
+	e.preventDefault();
+});
+$$(document).on('click','a',function(e){
+	touchmode = true;
+});
 $$(document).on('touchmove','a',function(e){
 	touchmove = true;
 });
