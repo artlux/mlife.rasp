@@ -3,7 +3,7 @@
 window.reloadPageInJs = false;
 
 window.debug = false;
-window.startUrl = 'http://mlife.by/ajax/rasp_app/';
+window.startUrl = 'https://mlife.by/ajax/rasp_app/';
 
 window.deviceId = '';
 
@@ -836,6 +836,7 @@ function loadPages(step,data){
 										timeout: 5000,
 										success : function(data){
 											localStorage.setItem('version',data);
+											localStorage.setItem('last_version',data);
 											version = data;
 											loadVersion = true;
 											window.curentLoadBase = false;
