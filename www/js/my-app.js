@@ -1,6 +1,7 @@
 // Initialize your app
 //device.uuid
 window.reloadPageInJs = false;
+window.ftracer = false;
 
 window.debug = false;
 window.startUrl = 'https://mlife.by/ajax/rasp_app/';
@@ -37,6 +38,7 @@ var pullToRefresh = false;
 var startPageContent = function(content){
 	if(content) content = content.replace("link.html?page=","");
 	if(!content) content = 'main';
+	trace('startPageContent '+content);
 	//setTimeout(function(){
 	getPage(content);
 	//},500);
@@ -212,7 +214,7 @@ function getTmpl(id){
 var loader = false;
 
 function getPage(page){
-	
+	trace('getPage '+page);
 	checkConnection();
 	
 	if(typeof window.getPageHandler == 'function'){
@@ -253,21 +255,25 @@ function getPage(page){
 	}
 	
 	function lpage(page){
+	trace('lpage '+page);
 	db.transaction(function(tx){
 	tx.executeSql("SELECT * FROM pages WHERE ID=?",[page],function(t,res){
+	trace('executeSql '+page);
 	if(res.rows.length > 0){
 		var tmp = getTmpl(res.rows.item(0)['type']);
 		if(!tmp){
 			loadCnt = '<div class="content-block-inner"><p class="errorPage">ERROR load page '+page+'</p><p>Шаблон не найден, возможно произошла ошибка при загрузке данных. Проверьте соединение с Internet и повторите загрузку.</p><p><a href="#" id="loadBase" class="button active">Загрузить данные</a></p></div>';
 		}else{
 			if (window.debug) console.log('startpage - '+page);
-			if(window.onPageGenerate !== false) {
+			if(typeof window.onPageGenerate == 'function') {
 				var loadCntTemp = window.onPageGenerate(page,JSON.parse(res.rows.item(0)['text']),tmp);
 				if(loadCntTemp) loadCnt = loadCntTemp;
 			}
 			if(!loadCnt){
+			trace('start compiled '+page);
 			var compiled = Template7(tmp).compile();
 			loadCnt = compiled(JSON.parse(res.rows.item(0)['text']));
+			trace('end compiled '+page);
 			}
 		}
 	}
@@ -313,37 +319,51 @@ function getPage(page){
 
 function loadPageForUrl(href){
 	if(href.indexOf('link.html') === 0){
+		trace('loadPageForUrl start '+href);
 		window.myApp.showPreloader("Загрузка страницы");
 		startPageContent(href);
+		trace('loadPageForUrl start paste '+href);
 		setTimeout(function t(){
+			trace('loadPageForUrl start paste '+href);
 			if(!loadCnt) {
-				setTimeout(t,100);
+				setTimeout(t,50);
 			}else{
-			content = loadCnt;
-			loadCnt = false;
 			
-			if(!pullToRefresh){
-			content = '<div class="page" data-page="'+curentPage+'"><div class="page-content">'+content+'</div></div>';
+			
+			if(typeof window.custom__loadPageForUrl == 'function') {
+			
+				window.custom__loadPageForUrl(href);
+			
 			}else{
-			pullToRefresh = false;
-			content = '<div class="page" data-page="'+curentPage+'"><div class="page-content pull-to-refresh-content"><div class="pull-to-refresh-layer"><div class="preloader"></div><div class="pull-to-refresh-arrow"></div></div>'+content+'</div></div>';
-			}
-			if(curentPage == 'main' || curentPage == 'main_old') {
-				window.reload = true;
-			}
-			window.mainView.router.load({
-			  content: content,
-			  animatePages: false,
-			  reload: window.reload,
-			  ignoreCache: true
-			});
-			if(curentPage == 'main' || curentPage == 'main_old') {
-				window.reload = false;
-			}
-			window.myApp.hidePreloader();
+			
+				content = loadCnt;
+				loadCnt = false;
+				
+				if(!pullToRefresh){
+				content = '<div class="page" data-page="'+curentPage+'"><div class="page-content">'+content+'</div></div>';
+				}else{
+				pullToRefresh = false;
+				content = '<div class="page" data-page="'+curentPage+'"><div class="page-content pull-to-refresh-content"><div class="pull-to-refresh-layer"><div class="preloader"></div><div class="pull-to-refresh-arrow"></div></div>'+content+'</div></div>';
+				}
+				if(curentPage == 'main' || curentPage == 'main_old') {
+					window.reload = true;
+				}
+				window.mainView.router.load({
+				  content: content,
+				  animatePages: false,
+				  reload: window.reload,
+				  ignoreCache: true
+				});
+				if(curentPage == 'main' || curentPage == 'main_old') {
+					window.reload = false;
+				}
+				trace('loadPageForUrl end paste '+href);
+				window.myApp.hidePreloader();
 				
 			}
-		},150);
+			
+			}
+		},0);
 	
 	}else{
 		return;
@@ -854,4 +874,16 @@ function loadPages(step,data){
 	}
 	},150);
 	
+}
+
+var tracer = '';
+var tracerStart = '';
+
+function trace(text, tm){
+	if(!window.ftracer) return;
+	if(!tm) tm = 0;
+	var d = new Date();
+	if(!tracer) tracerStart = d.getTime();
+	var new_time = (d.getTime() - tracerStart + tm);
+	tracer += new_time + 'ms - '+ text+'<br>';
 }
