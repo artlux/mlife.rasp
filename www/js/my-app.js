@@ -320,7 +320,7 @@ function getPage(page){
 function loadPageForUrl(href){
 	if(href.indexOf('link.html') === 0){
 		trace('loadPageForUrl start '+href);
-		$$('#minPreloader').show();
+		
 		startPageContent(href);
 		trace('loadPageForUrl start paste '+href);
 		setTimeout(function t(){
