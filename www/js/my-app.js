@@ -121,7 +121,7 @@ setTimeout(function t(){
 		  animatePages: false,
 		  reload: window.reload
 		});
-		window.myApp.hidePreloader();
+		//window.myApp.hidePreloader();
 		
 		//window.reload = false;
 		loadJs();
@@ -320,7 +320,7 @@ function getPage(page){
 function loadPageForUrl(href){
 	if(href.indexOf('link.html') === 0){
 		trace('loadPageForUrl start '+href);
-		window.myApp.showPreloader("Загрузка страницы");
+		$$('#minPreloader').show();
 		startPageContent(href);
 		trace('loadPageForUrl start paste '+href);
 		setTimeout(function t(){
@@ -331,7 +331,7 @@ function loadPageForUrl(href){
 			
 			
 			if(typeof window.custom__loadPageForUrl == 'function') {
-			
+			//return;
 				window.custom__loadPageForUrl(href);
 			
 			}else{
@@ -358,7 +358,7 @@ function loadPageForUrl(href){
 					window.reload = false;
 				}
 				trace('loadPageForUrl end paste '+href);
-				window.myApp.hidePreloader();
+				//window.myApp.hidePreloader();
 				
 			}
 			
