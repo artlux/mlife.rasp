@@ -485,7 +485,10 @@ $$(document).on('click','a',function(e){
 		window.myApp.closePanel();
 	}
 	
-	if(window.curentLoadBase) return false;
+	if(window.curentLoadBase) {
+		e.preventDefault(); 
+		return false;
+	}
 	
 	if($$(this).attr('id')=='loadBase'){
 		
