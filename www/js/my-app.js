@@ -55,7 +55,7 @@ document.addEventListener("backbutton", function(){
 
 var db = false;
 function onRd(){
-
+navigator.splashscreen.show();
 window.myApp = new Framework7({
 	modalButtonOk: 'Подвердить',
 	modalButtonCancel: 'Отменить',
@@ -148,7 +148,7 @@ tx.executeSql("CREATE TABLE IF NOT EXISTS book (ID VARCHAR PRIMARY KEY, text TEX
 	startPageContent();
 });
 
-
+setTimeout(function(){navigator.splashscreen.hide();},2000);
 
 }
 
