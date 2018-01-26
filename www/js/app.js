@@ -26,7 +26,7 @@ window.mlfConfig = {
 
 var $ = Dom7;
 //var _app = new Framework7();
-
+var loadCnt = {};
 
 
 document.addEventListener("deviceready",onRd,false);
@@ -168,7 +168,7 @@ db.transaction(function(tx){
 	tx.executeSql("SELECT * FROM block WHERE ID=?",['js'],function(t,res){
 	if(res.rows.length > 0){
 	var d = res.rows.item(0)['text'];
-	$('#jsBlock').html(d);
+	eval(d);
 	}
 	});
 });
