@@ -25,9 +25,6 @@ window.mlfConfig = {
 }
 
 var $ = Dom7;
-//var _app = new Framework7();
-var loadCnt = {};
-
 
 document.addEventListener("deviceready",onRd,false);
 var db = false;
@@ -92,7 +89,7 @@ function checkVersion(){
 			//async : false,
 			cache: false,
 			crossDomain: true,
-			data : {device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
+			data : {version: window.mlfConfig.version, device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
 			dataType: 'json',
 			timeout: 3000,
 			success : function(data){
@@ -148,7 +145,7 @@ function startPageContent(){
 						
 					}
 				
-				},5000);
+				},150);
 				
 			}
 		},300);
@@ -223,7 +220,7 @@ function loadBaseDefault(step,step2){
 				//async : false,
 				cache: false,
 				crossDomain: true,
-				data : {device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
+				data : {version: window.mlfConfig.version, device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
 				dataType: 'json',
 				success : function(data){
 					
@@ -259,7 +256,7 @@ function loadBaseDefault(step,step2){
 				//async : false,
 				cache: false,
 				crossDomain: true,
-				data : {device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
+				data : {version: window.mlfConfig.version, device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
 				dataType: 'html',
 				success : function(data){
 					
@@ -292,7 +289,7 @@ function loadBaseDefault(step,step2){
 				//async : false,
 				cache: false,
 				crossDomain: true,
-				data : {device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
+				data : {version: window.mlfConfig.version, device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
 				dataType: 'html',
 				success : function(data){
 					
@@ -325,7 +322,7 @@ function loadBaseDefault(step,step2){
 				//async : false,
 				cache: false,
 				crossDomain: true,
-				data : {device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
+				data : {version: window.mlfConfig.version, device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
 				dataType: 'html',
 				success : function(data){
 					
@@ -358,7 +355,7 @@ function loadBaseDefault(step,step2){
 				//async : false,
 				cache: false,
 				crossDomain: true,
-				data : {device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
+				data : {version: window.mlfConfig.version, device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
 				dataType: 'json',
 				success : function(data){
 					setIndikator(25);
@@ -418,7 +415,7 @@ function loadPages(step,data){
 						//async : false,
 						cache: false,
 						crossDomain: true,
-						data : {device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
+						data : {version: window.mlfConfig.version, device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
 						dataType: 'json',
 						success : function(dt){
 							
@@ -453,14 +450,14 @@ function loadPages(step,data){
 										//async : false,
 										cache: false,
 										crossDomain: true,
-										data : {device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
+										data : {version: window.mlfConfig.version, device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
 										dataType: 'json',
 										success : function(datav){
 											setIndikator(100);
 											localStorage.setItem('version',datav.version);
 											setTimeout(function(){
 												location.href = 'index.html';
-											},1000);
+											},150);
 										},
 										error : function(){
 											
