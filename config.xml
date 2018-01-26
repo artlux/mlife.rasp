@@ -14,7 +14,7 @@
 <plugin name="phonegap-plugin-push" spec="1.10.5">
     <param name="SENDER_ID" value="538125505294" />
 </plugin>
-<plugin name="cordova-plugin-admob-free"/>
+<plugin name="cordova-plugin-admob-free" spec="0.13.0"/>
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
