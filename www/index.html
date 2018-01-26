@@ -1,113 +1,22 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <title>MLife.Расписание.</title>
-    <!-- Path to Framework7 Library CSS-->
-    <link rel="stylesheet" href="css/framework7.ios.min.css">
-    <link rel="stylesheet" href="css/framework7.ios.colors.min.css">
-	<script id="jsBlock"></script>
-	<style id="stylesBlock">.wrapTimeRasp{display:none;}</style>
-  </head>
-  <body>
- 
-    <!-- Status bar overlay for fullscreen mode-->
-    <div class="statusbar-overlay"></div>
-    <!-- Panels overlay-->
-    <div class="panel-overlay"></div>
-    <!-- Left panel with reveal effect-->
-    <div class="panel panel-left panel-reveal" style="background:rgb(142, 142, 147);border-right:1px solid rgb(200, 199, 204);">
-<div class="center" style="text-align:center;border-bottom:1px solid #ffffff;background:#1d1d1d;"><img src="img/logo_rasp.png" style="height:39px;width:auto;"></div>
-<div class="list-block color-black" id="menuBlock" style="margin-top:0;"><div class="center color-white" style="text-align:center;font-weight:bold;">Нет данных по расписаниям.</br></br>Вы должны загрузить расписания.</div></div>
-    </div>
-    <!-- Right panel with cover effect-->
-    <div class="panel panel-right panel-cover" style="background:url('img/mlife_bg.png') 0 40px repeat;border-left:1px solid #000000;">
-      <div class="center" style="text-align:center;border-bottom:1px solid #ffffff;background:#1d1d1d;"><img src="img/logo_rasp.png" style="height:39px;width:auto;"></div>
-	<div id="defBook" class="content-block">
-	<div class="center color-white" style="text-align:center;font-weight:bold;">Список избранного пуст.</br></br>Вы можете добавить сюда страницы для быстрого доступа.</div>
-	</div>
-    </div>
-    <!-- Views-->
-    <div class="views">
-      <!-- Your main view, should have "view-main" class-->
-      <div class="view view-main">
-        <!-- Top Navbar-->
-        <div class="navbar layout-dark">
-	    <div class="navbar-inner">
-		<div class="left">
-			
-		</div>
-		<div class="center"><span>MLife.BY</span></div>
-		<div class="right">
-		    <a href="#" class="link icon-only open-panel" data-panel="left"> <i class="icon icon-bars color-pink"></i></a>
-		</div>
-	    </div>
-	</div>
-        <!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
-        <div class="pages navbar-through toolbar-through theme-pink">
-          <!-- Page, data-page contains page name-->
-          <div data-page="index" class="page with-subnavbar">
-            <!-- Scrollable page content-->
-            <div class="page-content">
-
-            </div>
-          </div>
-        </div>
-        <!-- Bottom Toolbar-->
-        <div class="toolbar bg-black">
-          <div class="toolbar-inner"><div id="bottomMenu"></div><a href="#" data-panel="right" class="link open-panel color-white">Избранное</a></div>
-        </div>   
-      </div>
-    </div>
-    
-    <!-- Services Popup -->
-<div class="popup popup-bokkmark">
-<div class="content-block">
-<p><a href="#" class="button color-pink close-popup">Закрыть окно</a></p>
-<div class="content-block-title spaceNormal">Избранное</div>
-  
-<form id="my-popup-bokkmark" class="list-block">
-	<ul>
-	<li>
-	<div class="item-content">
-	<div class="item-inner">
-	введите название вкладки
-	</div>
-	</div>
-	</li>
-	<li>
-	<div class="item-content">
-	<div class="item-media"><i class="icon icon-form-comment"></i></div>
-	<div class="item-inner">
-	<div class="item-input">
-		<input type="text" name="name" id="my-popup-bokkmark-name" placeholder="" autocomplete="none">
-		<input type="hidden" name="page" id="my-popup-bokkmark-page">
-	</div>
-	</div>
-	</div>
-	</li>
-	</ul>
-	<div class="content-block">
-	<div class="row">
-	  <div class="col-50">
-		<a href="#" class="button button-big button-fill color-green button-save">сохранить</a>
-	  </div>
-	  <div class="col-50">
-		<a href="#" class="button button-big button-fill color-red button-del">удалить</a>
-	  </div>
-	</div>
-	</div>
-</form>
-</div>
-</div>
-    
-    <!-- Path to Framework7 Library JS-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>MLife.Расписание.</title>
+<!-- Path to Framework7 Library CSS-->
+<link rel="stylesheet" href="css/framework7.min.css">
+<link rel="stylesheet" href="css/framework7-icons.css">
+<link rel="stylesheet" href="css/default.css">
+<script id="jsBlock"></script>
+<style id="stylesBlock"></style>
+</head>
+<body>
+<div class="mlf__wrap"></div>
 <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/framework7.min.js"></script>
-    <!-- Path to your app js-->
-	<script type="text/javascript" src="js/my-app.js"></script>
-  </body>
+<script type="text/javascript" src="js/framework7.min.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+</body>
 </html>
