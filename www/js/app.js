@@ -148,7 +148,7 @@ function startPageContent(){
 						
 					}
 				
-				},150);
+				},1500);
 				
 			}
 		},300);
