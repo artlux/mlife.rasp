@@ -455,10 +455,12 @@ function loadPages(step,data){
 										crossDomain: true,
 										data : {device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
 										dataType: 'json',
-										success : function(data){
+										success : function(datav){
 											setIndikator(100);
-											localStorage.setItem('version',data.version);
-											location.href = 'index.html';
+											localStorage.setItem('version',datav.version);
+											setTimeout(function(){
+												location.href = 'index.html';
+											},1000);
 										},
 										error : function(){
 											
