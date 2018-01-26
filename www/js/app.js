@@ -10,7 +10,7 @@ window.mlfConfig = {
 	loadCnt: false, //таймаут получения контента
 	baseName: 'mliferasp', //имя базы
 	last_version: false,
-	pageUpdateCount: 1500, //максимум страниц за раз при обновлении
+	pageUpdateCount: 15, //максимум страниц за раз при обновлении
 	
 	lang: {
 		ru: {
