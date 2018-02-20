@@ -27,6 +27,11 @@
 	<preference name="SplashScreenDelay" value="3000" />
     <icon src="icon.png" />
     <platform name="android">
+		<config-file target="AndroidManifest.xml" parent="/manifest">
+			<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+			<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+			<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+		</config-file>
         <allow-intent href="market:*" />
 		<preference name="android-minSdkVersion" value="14" />
 		<preference name="SplashMaintainAspectRatio" value="true" />

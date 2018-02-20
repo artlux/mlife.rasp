@@ -8,7 +8,7 @@ window.mlfConfig = {
 	version: localStorage.getItem('version'),
 	tmpl: false, //templates
 	loadCnt: false, //таймаут получения контента
-	baseName: 'mliferasp', //имя базы
+	baseName: 'mliferasp2', //имя базы
 	last_version: false,
 	pageUpdateCount: 15, //максимум страниц за раз при обновлении
 	
@@ -23,8 +23,12 @@ window.mlfConfig = {
 		}
 	}
 }
+var loadCnt = {};
 
 var $ = Dom7;
+//var _app = new Framework7();
+
+
 
 document.addEventListener("deviceready",onRd,false);
 var db = false;
@@ -89,7 +93,7 @@ function checkVersion(){
 			//async : false,
 			cache: false,
 			crossDomain: true,
-			data : {version: window.mlfConfig.version, device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
+			data : {device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
 			dataType: 'json',
 			timeout: 3000,
 			success : function(data){
@@ -220,7 +224,7 @@ function loadBaseDefault(step,step2){
 				//async : false,
 				cache: false,
 				crossDomain: true,
-				data : {version: window.mlfConfig.version, device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
+				data : {device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
 				dataType: 'json',
 				success : function(data){
 					
@@ -256,7 +260,7 @@ function loadBaseDefault(step,step2){
 				//async : false,
 				cache: false,
 				crossDomain: true,
-				data : {version: window.mlfConfig.version, device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
+				data : {device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
 				dataType: 'html',
 				success : function(data){
 					
@@ -289,7 +293,7 @@ function loadBaseDefault(step,step2){
 				//async : false,
 				cache: false,
 				crossDomain: true,
-				data : {version: window.mlfConfig.version, device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
+				data : {device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
 				dataType: 'html',
 				success : function(data){
 					
@@ -322,7 +326,7 @@ function loadBaseDefault(step,step2){
 				//async : false,
 				cache: false,
 				crossDomain: true,
-				data : {version: window.mlfConfig.version, device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
+				data : {device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
 				dataType: 'html',
 				success : function(data){
 					
@@ -355,7 +359,7 @@ function loadBaseDefault(step,step2){
 				//async : false,
 				cache: false,
 				crossDomain: true,
-				data : {version: window.mlfConfig.version, device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
+				data : {device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
 				dataType: 'json',
 				success : function(data){
 					setIndikator(25);
@@ -415,7 +419,7 @@ function loadPages(step,data){
 						//async : false,
 						cache: false,
 						crossDomain: true,
-						data : {version: window.mlfConfig.version, device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
+						data : {device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
 						dataType: 'json',
 						success : function(dt){
 							
@@ -450,14 +454,12 @@ function loadPages(step,data){
 										//async : false,
 										cache: false,
 										crossDomain: true,
-										data : {version: window.mlfConfig.version, device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
+										data : {device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
 										dataType: 'json',
-										success : function(datav){
+										success : function(data){
 											setIndikator(100);
-											localStorage.setItem('version',datav.version);
-											setTimeout(function(){
-												location.href = 'index.html';
-											},150);
+											localStorage.setItem('version',data.version);
+											location.href = 'index.html';
 										},
 										error : function(){
 											
@@ -589,3 +591,4 @@ function getLang(id){
 	if(window.mlfConfig.lang[window.curentLang][id]) return window.mlfConfig.lang[window.curentLang][id];
 	return id;
 }
+
