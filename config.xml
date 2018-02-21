@@ -27,6 +27,7 @@
 	<preference name="ShowSplashScreenSpinner" value="false"/>
 	<preference name="AutoHideSplashScreen" value="true" />
 	<preference name="SplashScreenDelay" value="3000" />
+	<preference name="android-build-tool" value="gradle" />
     <icon src="icon.png" />
     <platform name="android">
 		<config-file target="AndroidManifest.xml" parent="/manifest">
