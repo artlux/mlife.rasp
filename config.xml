@@ -14,7 +14,7 @@
 <plugin name="cordova-plugin-insomnia" spec="~4.3.0"/>
 <plugin name="cordova-plugin-admob-free"/>
 <plugin name="phonegap-plugin-push">
-    <param name="SENDER_ID" value="649883880658" />
+    <param name="SENDER_ID" value="538125505294" />
 </plugin>
     <access origin="*" />
     <allow-intent href="http://*/*" />
