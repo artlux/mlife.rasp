@@ -27,7 +27,7 @@
 	<preference name="SplashScreenDelay" value="3000" />
     <icon src="icon.png" />
     <platform name="android">
-        <resource-file src="google_services.json" target="/google-services.json" />
+        <resource-file src="google-services.json" target="google-services.json" />
 		<allow-intent href="market:*" />
 		<preference name="android-minSdkVersion" value="14" />
 		<preference name="SplashMaintainAspectRatio" value="true" />
