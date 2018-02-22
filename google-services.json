@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "538125505294",
+    "firebase_url": "https://mliferasp.firebaseio.com",
+    "project_id": "mliferasp",
+    "storage_bucket": "mliferasp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:538125505294:android:a370c391acec76c6",
+        "android_client_info": {
+          "package_name": "mlife.rasp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "538125505294-i32sabaebbrersa8abvnlhaopv35m1em.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtNEa-OpOxtK9yZ3-C6lyqPyMivg8mOqQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
