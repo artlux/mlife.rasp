@@ -31,7 +31,7 @@
 			<uses-permission platform="android" name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
 		</config-file>
         <allow-intent href="market:*" />
-		<preference name="android-minSdkVersion" value="16" />
+		<preference name="android-minSdkVersion" value="14" />
 		<preference name="SplashMaintainAspectRatio" value="true" />
 		<splash src="res/screen/android/splash.png"/>
 		<icon src="res/android/ldpi.png" density="ldpi" />
