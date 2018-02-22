@@ -12,6 +12,7 @@
 <plugin name="cordova-plugin-geolocation" spec="~2.4.1" />
 <plugin name="cordova-plugin-splashscreen" spec="~4.0.3"/>
 <plugin name="cordova-plugin-insomnia" spec="~4.3.0"/>
+<plugin name="cordova-plugin-admob-free"/>
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
