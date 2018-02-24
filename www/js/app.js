@@ -1,17 +1,17 @@
 window.curentLoadBase = false; //ожидание загрузки данных в кеш-базу
 window.curentLang = 'ru'; //язык по умолчанию
 window.mlfConfig = {
-	debug: false,
-	startUrl: 'https://mlife.by/ajax/rasp_app_v2/',
-	deviceId: '',
-	connection: false,
+	debug: false, //отладка
+	startUrl: 'https://mlife.by/ajax/rasp_app_v2/', //стартовый адрес
+	deviceId: '', //ид устройства
+	connection: false, //статус соединения
 	version: localStorage.getItem('version'),
 	tmpl: false, //templates
 	loadCnt: false, //таймаут получения контента
 	baseName: 'mliferasp2', //имя базы
-	last_version: false,
-	pageUpdateCount: 15, //максимум страниц за раз при обновлении
-	
+	last_version: false, //последняя версия полученая с сервера обновлений
+	pageUpdateCount: 20, //максимум страниц за раз при обновлении
+	browser: false, //если приложение запущено в браузере, использовать для разработки
 	lang: {
 		ru: {
 			'FIRST_LOAD': '',
@@ -28,13 +28,15 @@ var loadCnt = {};
 var $ = Dom7;
 //var _app = new Framework7();
 
-
-
 document.addEventListener("deviceready",onRd,false);
 var db = false;
 var pages_arr = [];
 
 function onRd(){
+	
+	if(typeof navigator.splashscreen != 'undefined'){ 
+		navigator.splashscreen.show();
+	}
 	
 	//уникальный идентификатор устройства
 	if(typeof device != 'undefined') {
@@ -62,7 +64,7 @@ function onRd(){
 	}
 	window.db = db;
 
-	db.transaction(function(tx){
+	window.db.transaction(function(tx){
 	tx.executeSql("CREATE TABLE IF NOT EXISTS pages (ID VARCHAR PRIMARY KEY, type VARCHAR, text TEXT)",[]);
 	tx.executeSql("CREATE TABLE IF NOT EXISTS block (ID VARCHAR PRIMARY KEY, text TEXT)",[]);
 	tx.executeSql("CREATE TABLE IF NOT EXISTS tmpl (ID VARCHAR PRIMARY KEY, text TEXT)",[]);
@@ -93,7 +95,7 @@ function checkVersion(){
 			//async : false,
 			cache: false,
 			crossDomain: true,
-			data : {device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
+			data : {version: window.mlfConfig.version, device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
 			dataType: 'json',
 			timeout: 3000,
 			success : function(data){
@@ -122,6 +124,9 @@ function startPageContent(){
 	if(!mainHtml) { //нет шаблонов
 		
 		loadBaseDefault();
+		if(typeof navigator.splashscreen != 'undefined'){ 
+			navigator.splashscreen.hide();
+		}
 		
 	}else{
 		//есть шаблоны
@@ -169,7 +174,7 @@ db.transaction(function(tx){
 	tx.executeSql("SELECT * FROM block WHERE ID=?",['js'],function(t,res){
 	if(res.rows.length > 0){
 	var d = res.rows.item(0)['text'];
-	eval(d);
+	if(!window.mlfConfig.browser) eval(d);
 	}
 	});
 });
@@ -182,7 +187,7 @@ db.transaction(function(tx){
 	tx.executeSql("SELECT * FROM block WHERE ID=?",['css'],function(t,res){
 	if(res.rows.length > 0){
 	var d = res.rows.item(0)['text'];
-	$('#stylesBlock').html(d);
+	if(!window.mlfConfig.browser) $('#stylesBlock').html(d);
 	}
 	});
 });
@@ -224,7 +229,7 @@ function loadBaseDefault(step,step2){
 				//async : false,
 				cache: false,
 				crossDomain: true,
-				data : {device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
+				data : {version: window.mlfConfig.version, device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
 				dataType: 'json',
 				success : function(data){
 					
@@ -260,7 +265,7 @@ function loadBaseDefault(step,step2){
 				//async : false,
 				cache: false,
 				crossDomain: true,
-				data : {device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
+				data : {version: window.mlfConfig.version, device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
 				dataType: 'html',
 				success : function(data){
 					
@@ -293,7 +298,7 @@ function loadBaseDefault(step,step2){
 				//async : false,
 				cache: false,
 				crossDomain: true,
-				data : {device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
+				data : {version: window.mlfConfig.version, device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
 				dataType: 'html',
 				success : function(data){
 					
@@ -326,7 +331,7 @@ function loadBaseDefault(step,step2){
 				//async : false,
 				cache: false,
 				crossDomain: true,
-				data : {device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
+				data : {version: window.mlfConfig.version, device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
 				dataType: 'html',
 				success : function(data){
 					
@@ -359,7 +364,7 @@ function loadBaseDefault(step,step2){
 				//async : false,
 				cache: false,
 				crossDomain: true,
-				data : {device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
+				data : {version: window.mlfConfig.version, device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
 				dataType: 'json',
 				success : function(data){
 					setIndikator(25);
@@ -419,7 +424,7 @@ function loadPages(step,data){
 						//async : false,
 						cache: false,
 						crossDomain: true,
-						data : {device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
+						data : {version: window.mlfConfig.version, device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
 						dataType: 'json',
 						success : function(dt){
 							
@@ -454,7 +459,7 @@ function loadPages(step,data){
 										//async : false,
 										cache: false,
 										crossDomain: true,
-										data : {device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
+										data : {version: window.mlfConfig.version, device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
 										dataType: 'json',
 										success : function(data){
 											setIndikator(100);
@@ -501,6 +506,9 @@ $(document).on('click','.loadData',function(e){
 	e.preventDefault();
 	$('.loadData').remove();
 	loadBaseDefault();
+	if(typeof navigator.splashscreen != 'undefined'){ 
+		navigator.splashscreen.hide();
+	}
 });
 
 //установка индикатора загрузки
