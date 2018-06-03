@@ -239,7 +239,7 @@ function loadBaseDefault(step,step2){
 						for (key in data) {
 							tx.executeSql("INSERT INTO tmpl (ID, text) VALUES (?,?)",[key,data[key]],function(){});
 						}
-					},function(r){
+					},function(){
 					},function(){
 						loadBaseDefault(3);
 					});
