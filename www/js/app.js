@@ -69,8 +69,7 @@ function onRd(){
 	tx.executeSql("CREATE TABLE IF NOT EXISTS block (ID VARCHAR PRIMARY KEY, text TEXT)",[]);
 	tx.executeSql("CREATE TABLE IF NOT EXISTS tmpl (ID VARCHAR PRIMARY KEY, text TEXT)",[]);
 	tx.executeSql("CREATE TABLE IF NOT EXISTS book (ID VARCHAR PRIMARY KEY, text TEXT)",[]);
-	},function(){
-	},function(){
+	},function(err){sendErrorSqlTransaction(err);},function(){
 		checkConnection();
 		setTmpl();
 	});
@@ -177,7 +176,7 @@ db.transaction(function(tx){
 	if(!window.mlfConfig.browser) eval(d);
 	}
 	});
-});
+},function(err){sendErrorSqlTransaction(err);});
 }
 
 //загрузка css
@@ -190,7 +189,7 @@ db.transaction(function(tx){
 	if(!window.mlfConfig.browser) $('#stylesBlock').html(d);
 	}
 	});
-});
+},function(err){sendErrorSqlTransaction(err);});
 }
 
 //загрузка данных по умолчанию
@@ -216,7 +215,7 @@ function loadBaseDefault(step,step2){
 				tx.executeSql("DELETE FROM block WHERE ID>0",[]);
 				tx.executeSql("DELETE FROM pages WHERE ID>0",[]);
 				tx.executeSql("DELETE FROM tmpl WHERE ID>0",[]);
-			},function(){},function(){
+			},function(err){sendErrorSqlTransaction(err);},function(){
 				window.mlfConfig.tmpl = {};
 				loadBaseDefault(2);
 				setIndikator(2);
@@ -239,8 +238,7 @@ function loadBaseDefault(step,step2){
 						for (key in data) {
 							tx.executeSql("INSERT INTO tmpl (ID, text) VALUES (?,?)",[key,data[key]],function(){});
 						}
-					},function(){
-					},function(){
+					},function(err){sendErrorSqlTransaction(err);},function(){
 						loadBaseDefault(3);
 					});
 				},
@@ -248,7 +246,7 @@ function loadBaseDefault(step,step2){
 					
 					db.transaction(function(tx){
 						tx.executeSql("DELETE FROM tmpl WHERE ID>0",[]);
-					},function(){},function(){
+					},function(err){sendErrorSqlTransaction(err);},function(){
 						window.curentLoadBase = false;
 						setIndikator('error');
 
@@ -275,13 +273,13 @@ function loadBaseDefault(step,step2){
 					tx.executeSql("INSERT INTO block (ID, text) VALUES (?,?)",['menu',data],function(){
 					loadBaseDefault(4);
 					});
-					});
+					},function(err){sendErrorSqlTransaction(err);});
 				},
 				error : function(){
 					
 					db.transaction(function(tx){
 						tx.executeSql("DELETE FROM tmpl WHERE ID>0",[]);
-					},function(){},function(){
+					},function(err){sendErrorSqlTransaction(err);},function(){
 						window.curentLoadBase = false;
 						setIndikator('error');
 
@@ -308,13 +306,13 @@ function loadBaseDefault(step,step2){
 					tx.executeSql("INSERT INTO block (ID, text) VALUES (?,?)",['js',data],function(){
 					loadBaseDefault(5);
 					});
-					});
+					},function(err){sendErrorSqlTransaction(err);});
 				},
 				error : function(){
 					
 					db.transaction(function(tx){
 						tx.executeSql("DELETE FROM tmpl WHERE ID>0",[]);
-					},function(){},function(){
+					},function(err){sendErrorSqlTransaction(err);},function(){
 						window.curentLoadBase = false;
 						setIndikator('error');
 
@@ -341,13 +339,13 @@ function loadBaseDefault(step,step2){
 					tx.executeSql("INSERT INTO block (ID, text) VALUES (?,?)",['css',data],function(){
 					loadBaseDefault(6);
 					});
-					});
+					},function(err){sendErrorSqlTransaction(err);});
 				},
 				error : function(){
 					
 					db.transaction(function(tx){
 						tx.executeSql("DELETE FROM tmpl WHERE ID>0",[]);
-					},function(){},function(){
+					},function(err){sendErrorSqlTransaction(err);},function(){
 						window.curentLoadBase = false;
 						setIndikator('error');
 
@@ -374,7 +372,7 @@ function loadBaseDefault(step,step2){
 					
 					db.transaction(function(tx){
 						tx.executeSql("DELETE FROM tmpl WHERE ID>0",[]);
-					},function(){},function(){
+					},function(err){sendErrorSqlTransaction(err);},function(){
 						window.curentLoadBase = false;
 						setIndikator('error');
 					});
@@ -439,7 +437,7 @@ function loadPages(step,data){
 									for(key in dt){
 										tx.executeSql("INSERT INTO pages (ID, type, text) VALUES (?,?,?)",[dt[key]['page'],dt[key]['type'],JSON.stringify(dt[key]['text'])],function(){});
 									}
-								},function(){},function(){
+								},function(err){sendErrorSqlTransaction(err);},function(){
 									loadPages(next_k);
 								});
 								
@@ -450,7 +448,7 @@ function loadPages(step,data){
 									for(key in dt){
 										tx.executeSql("INSERT INTO pages (ID, type, text) VALUES (?,?,?)",[dt[key]['page'],dt[key]['type'],JSON.stringify(dt[key]['text'])],function(){});
 									}
-								},function(){},function(){
+								},function(err){sendErrorSqlTransaction(err);},function(){
 									
 									setIndikator(99);
 									
@@ -470,7 +468,7 @@ function loadPages(step,data){
 											
 											db.transaction(function(tx){
 												tx.executeSql("DELETE FROM tmpl WHERE ID>0",[]);
-											},function(){},function(){
+											},function(err){sendErrorSqlTransaction(err);},function(){
 												window.curentLoadBase = false;
 												setIndikator('error');
 											});
@@ -487,7 +485,7 @@ function loadPages(step,data){
 							
 							db.transaction(function(tx){
 								tx.executeSql("DELETE FROM tmpl WHERE ID>0",[]);
-							},function(){},function(){
+							},function(err){sendErrorSqlTransaction(err);},function(){
 								window.curentLoadBase = false;
 								setIndikator('error');
 							});
@@ -584,7 +582,7 @@ function setTmpl(){
 	startPageContent();
 	}
 	);
-	});
+	},function(err){sendErrorSqlTransaction(err);});
 }
 
 //получение шаблона по его id
@@ -600,3 +598,25 @@ function getLang(id){
 	return id;
 }
 
+//отправка ошибок
+function sendErrorSqlTransaction(err){
+	
+	if($('.loadingBlock__indikator').html()){
+		//$('.loadingBlock').append('<br><p><font style="color:red;">ERROR_CODE '+err.code+'</font>: '+err.message+'</p>');
+	}
+	
+	Framework7.request({
+		url : window.mlfConfig.startUrl+'ajax/sql_error/',
+		//async : false,
+		cache: false,
+		crossDomain: true,
+		data : {err_message:err.message, err_code:err.code, version: window.mlfConfig.version, device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
+		dataType: 'html',
+		timeout: 3000,
+		success : function(data){
+		},
+		error : function(){
+		}
+	});
+	
+}
