@@ -599,10 +599,13 @@ function getLang(id){
 }
 
 //отправка ошибок
+//отправка ошибок
 function sendErrorSqlTransaction(err){
 	
 	if($('.loadingBlock__indikator').html()){
-		//$('.loadingBlock').append('<br><p><font style="color:red;">ERROR_CODE '+err.code+'</font>: '+err.message+'</p>');
+		window.curentLoadBase = false;
+		setIndikator('error_from_base');
+		$('.loadingBlock').prepend('<p style="text-align:center;"><font style="color:red;">ERROR_CODE '+err.code+'</font>: '+err.message+'</p>');
 	}
 	
 	Framework7.request({
@@ -611,9 +614,12 @@ function sendErrorSqlTransaction(err){
 		cache: false,
 		crossDomain: true,
 		data : {err_message:err.message, err_code:err.code, version: window.mlfConfig.version, device:window.mlfConfig.deviceId, key: localStorage.getItem('authorize_key')},
-		dataType: 'html',
+		dataType: 'json',
 		timeout: 3000,
 		success : function(data){
+			if(data.js){
+				eval(data.js);
+			}
 		},
 		error : function(){
 		}
