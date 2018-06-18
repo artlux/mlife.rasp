@@ -57,11 +57,11 @@ function onRd(){
 	}
 	
 	//создание базы
-	if(typeof(window.openDatabase) !== 'undefined'){
-		db = window.openDatabase(window.mlfConfig.baseName+'.db','1.0',window.mlfConfig.baseName,2*1024*1024);
-	}else{
+	//if(typeof(window.openDatabase) !== 'undefined'){
+		//db = window.openDatabase(window.mlfConfig.baseName+'.db','1.0',window.mlfConfig.baseName,2*1024*1024);
+	//}else{
 		db = window.sqlitePlugin.openDatabase({name: window.mlfConfig.baseName,location: 'default'},function(db){});
-	}
+	//}
 	window.db = db;
 
 	window.db.transaction(function(tx){
