@@ -14,7 +14,6 @@
 <plugin name="cordova-plugin-network-information" spec="~2.0.1" />
 <plugin name="cordova-plugin-file" spec="~6.0.1" />
 <plugin name="cordova-plugin-inappbrowser" spec="~3.0.0" />
-<plugin name="cordova-sqlite-storage-dependencies" spec="~1.2.0" />
 <plugin name="cordova-sqlite-storage" spec="~2.0.2" />
 <plugin name="cordova-plugin-geolocation" spec="~2.4.3" />
 <plugin name="cordova-plugin-splashscreen" spec="~4.0.3"/>
@@ -39,11 +38,11 @@
 	<preference name="orientation" value="portrait" />
     <icon src="icon.png" />
     <platform name="android">
+		<preference name="AndroidPersistentFileLocation" value="Internal" />
         <resource-file src="google-services.json" target="google-services.json" />
 		<allow-intent href="market:*" />
 		<preference name="android-minSdkVersion" value="14" />
 		<preference name="SplashMaintainAspectRatio" value="true" />
-		<preference name="AndroidPersistentFileLocation" value="Compatibility" />
 		<splash src="res/screen/android/splash.png"/>
 		<icon src="res/android/ldpi.png" density="ldpi" />
         <icon src="res/android/mdpi.png" density="mdpi" />
@@ -53,6 +52,7 @@
         <icon src="res/android/xxxhdpi.png" density="xxxhdpi" />
     </platform>
     <platform name="ios">
+		<preference name="iosPersistentFileLocation" value="Library" />
 		<resource-file src="GoogleService-Info.plist" />
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
